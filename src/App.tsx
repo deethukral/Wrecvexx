@@ -39,7 +39,7 @@ import { GooglePlayLaunchKitModal } from './components/GooglePlayLaunchKitModal'
 import { SettingsModal } from './components/SettingsModal';
 import { GameOverModal } from './components/GameOverModal';
 import { VictoryModal } from './components/VictoryModal';
-
+   import { SupportButton } from './components/SupportButton';
 export default function App() {
   // PWA Install hook
   const { isInstallable: isPWAInstallable, isInstalled: isPWAInstalled, install: installPWA } = usePWAInstall();
@@ -398,6 +398,7 @@ export default function App() {
           setIsLeaderboardOpen(true);
         }}
       />
+      <SupportButton />
     </div>
   );
 }
