@@ -1,0 +1,8 @@
+{
+  "name": "Pixel Striker: Retro Galaxy",
+  "description": "Retro pixel art arcade shooter with multi-stage boss battles, fluid ship movement, power-ups, competitive difficulty modes, global leaderboards, and cosmetic skin store.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
