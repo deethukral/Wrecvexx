@@ -2,7 +2,7 @@ import React from 'react';
 
 export function SupportButton() {
   const handleSupport = () => {
-    const upiId ='8527990409@axl';
+    const upiId ="beautybelle034@okhdfcbank";
     window.location.href = `upi://pay?pa=${upiId}&pn=Wrecvexx&am=50&cu=INR&tn=Support Wrecvexx game`;
   };
   return (
