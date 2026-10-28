@@ -377,47 +377,43 @@ export function drawModernDreadnought(ctx: CanvasRenderingContext2D, x: number, 
 
 export function drawModernAsteroid(
   ctx: CanvasRenderingContext2D,
-  x: number,
-  y: number,
+  x: number, y: number,
   radius: number,
   rot: number
 ) {
   ctx.save();
   ctx.translate(x, y);
   ctx.rotate(rot);
-
-  // Irregular rock silhouette with shadow
-  const grad = ctx.createRadialGradient(-radius * 0.3, -radius * 0.3, radius * 0.1, 0, 0, radius);
-  grad.addColorStop(0, '#64748b');
-  grad.addColorStop(0.6, '#334155');
-  grad.addColorStop(1, '#0f172a');
-
+  // ULTRA PBR - Brown rocky like poster
+  const grad = ctx.createRadialGradient(-radius * 0.35, -radius * 0.35, radius * 0.15, 0, 0, radius);
+  grad.addColorStop(0, '#a0937e');
+  grad.addColorStop(0.3, '#6b5e4f');
+  grad.addColorStop(0.65, '#3d342b');
+  grad.addColorStop(1, '#151210');
   ctx.fillStyle = grad;
-  ctx.strokeStyle = '#475569';
-  ctx.lineWidth = 1.5;
-
+  ctx.shadowBlur = 20;
+  ctx.shadowColor = 'rgba(0,0,0,0.9)';
   ctx.beginPath();
-  const points = 8;
-  for (let i = 0; i < points; i++) {
-    const angle = (i * Math.PI * 2) / points;
-    const offset = Math.sin(angle * 3) * (radius * 0.15);
+  for (let i = 0; i < 8; i++) {
+    const angle = (i * Math.PI * 2) / 8;
+    const offset = Math.sin(angle * 3.7) * (radius * 0.18) + Math.cos(angle * 2.3) * (radius * 0.1);
     const r = radius + offset;
     const px = Math.cos(angle) * r;
     const py = Math.sin(angle) * r;
-    if (i === 0) ctx.moveTo(px, py);
-    else ctx.lineTo(px, py);
+    if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
   }
   ctx.closePath();
   ctx.fill();
-  ctx.stroke();
-
-  // Craters with depth shading
-  ctx.fillStyle = '#1e293b';
+  ctx.shadowBlur = 0;
+  // Crater depth
+  ctx.fillStyle = 'rgba(0,0,0,0.45)';
   ctx.beginPath();
-  ctx.arc(-radius * 0.25, -radius * 0.2, radius * 0.22, 0, Math.PI * 2);
-  ctx.arc(radius * 0.3, radius * 0.25, radius * 0.28, 0, Math.PI * 2);
+  ctx.arc(-radius * 0.25, -radius * 0.2, radius * 0.24, 0, Math.PI * 2);
   ctx.fill();
-
+  ctx.fillStyle = 'rgba(255,255,255,0.12)';
+  ctx.beginPath();
+  ctx.arc(-radius * 0.3, -radius * 0.25, radius * 0.12, 0, Math.PI * 2);
+  ctx.fill();
   ctx.restore();
 }
 
