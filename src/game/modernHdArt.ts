@@ -55,42 +55,37 @@ export function drawModernPlayerShip(
   const rightWingScale = bank === 1 ? 0.72 : bank === -1 ? 1.15 : 1.0;
 
   // 1. Modern Volumetric Ion Thruster Plumes
-  const thrustLength = 24 + (speedY < 0 ? 18 : 6) + Math.random() * 6;
-  const thrustColor = skin.trailColor;
-
-  const enginePositions = skin.engineStyle === 'tri' || skin.engineStyle === 'hyper'
-    ? [-12, 0, 12]
-    : [-11, 11];
-
-  enginePositions.forEach((ex, idx) => {
-    const isCenter = ex === 0;
-    const len = isCenter ? thrustLength * 1.3 : thrustLength;
-
-    // Outer plasma flame plume
+    // === ULTRA PHONE POSTER BLUE THRUSTER ===
+  const thrustLength = 38 + (speedY < 0 ? 22 : 8) + Math.random() * 8;
+  const thrustColor = "#00e5ff";
+  const enginePositions = [-11, 11];
+  enginePositions.forEach((ex) => {
+    const len = thrustLength;
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";
+    drawGlow(ctx, ex, 20, 32, "#00ffff", 0.9);
     const plumeGrad = ctx.createLinearGradient(ex, 14, ex, 14 + len);
     plumeGrad.addColorStop(0, '#ffffff');
-    plumeGrad.addColorStop(0.3, thrustColor);
-    plumeGrad.addColorStop(0.8, skin.accentColor);
+    plumeGrad.addColorStop(0.15, '#a0ffff');
+    plumeGrad.addColorStop(0.4, thrustColor);
+    plumeGrad.addColorStop(0.85, '#0066ff');
     plumeGrad.addColorStop(1, 'rgba(0,0,0,0)');
-
     ctx.fillStyle = plumeGrad;
+    ctx.shadowBlur = 25;
+    ctx.shadowColor = "#00ffff";
     ctx.beginPath();
-    ctx.moveTo(ex - 4, 14);
-    ctx.quadraticCurveTo(ex - 6, 14 + len * 0.5, ex, 14 + len);
-    ctx.quadraticCurveTo(ex + 6, 14 + len * 0.5, ex + 4, 14);
+    ctx.moveTo(ex - 5, 14);
+    ctx.quadraticCurveTo(ex - 7, 14 + len * 0.5, ex, 14 + len);
+    ctx.quadraticCurveTo(ex + 7, 14 + len * 0.5, ex + 5, 14);
     ctx.closePath();
     ctx.fill();
-
-    // Hot inner core
     ctx.fillStyle = '#ffffff';
+    ctx.shadowBlur = 0;
     ctx.beginPath();
-    ctx.ellipse(ex, 15, 2, 6, 0, 0, Math.PI * 2);
+    ctx.ellipse(ex, 16, 2.5, 7, 0, 0, Math.PI * 2);
     ctx.fill();
-
-    // Soft engine bloom
-    drawGlow(ctx, ex, 16, 14, thrustColor, 0.4);
+    ctx.restore();
   });
-
   // 2. Main Wings (Left and Right with dynamic perspective)
   // Left Wing
   ctx.save();
